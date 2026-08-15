@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday Aditi 🎂</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+
+            background: linear-gradient(
+                135deg,
+                #ff758c,
+                #ff7eb3,
+                #a18cd1
+            );
+
+            color: white;
+        }
+
+        .container {
+            min-height: 100vh;
+            padding: 30px 15px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Main heading */
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+
+            animation: glow 1.5s infinite alternate;
+        }
+
+        h2 {
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        /* Photo */
+
+        .photo {
+            width: 220px;
+            height: 220px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+            border: 6px solid white;
+
+            box-shadow:
+                0 0 20px white,
+                0 0 40px rgba(255,255,255,0.7);
+
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Birthday message */
+
+        .message {
+            max-width: 650px;
+
+            margin: 25px auto;
+
+            padding: 25px;
+
+            font-size: 20px;
+            line-height: 1.7;
+
+            background: rgba(255,255,255,0.18);
+
+            border-radius: 20px;
+
+            backdrop-filter: blur(5px);
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Buttons */
+
+        button {
+            padding: 15px 30px;
+
+            border: none;
+            border-radius: 30px;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            background: white;
+            color: #ff4f81;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+        }
+
+        /* Music button */
+
+        #musicButton {
+            position: fixed;
+
+            top: 15px;
+            right: 15px;
+
+            padding: 10px 18px;
+
+            font-size: 14px;
+
+            z-index: 1000;
+        }
+
+        /* Surprise */
+
+        #surprise {
+            display: none;
+
+            margin-top: 25px;
+
+            padding: 20px;
+
+            font-size: 25px;
+
+            animation: pop 0.6s ease;
+        }
+
+        /* Balloons */
+
+        .balloon {
+            position: fixed;
+
+            bottom: -100px;
+
+            font-size: 50px;
+
+            animation: rise 8s linear infinite;
+
+            z-index: -1;
+        }
+
+        .b1 {
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .b2 {
+            left: 25%;
+            animation-delay: 2s;
+        }
+
+        .b3 {
+            left: 50%;
+            animation-delay: 4s;
+        }
+
+        .b4 {
+            left: 75%;
+            animation-delay: 1s;
+        }
+
+        .b5 {
+            left: 90%;
+            animation-delay: 3s;
+        }
+
+        /* Glow animation */
+
+        @keyframes glow {
+
+            from {
+                text-shadow: 0 0 5px white;
+            }
+
+            to {
+                text-shadow:
+                    0 0 20px yellow,
+                    0 0 40px white,
+                    0 0 60px pink;
+            }
+        }
+
+        /* Photo floating */
+
+        @keyframes float {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Balloons */
+
+        @keyframes rise {
+
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-120vh);
+                opacity: 0;
+            }
+        }
+
+        /* Surprise animation */
+
+        @keyframes pop {
+
+            0% {
+                transform: scale(0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Confetti */
+
+        .confetti {
+            position: fixed;
+
+            width: 10px;
+            height: 10px;
+
+            top: -10px;
+
+            animation: fall 4s linear infinite;
+
+            z-index: 999;
+        }
+
+        @keyframes fall {
+
+            to {
+                transform:
+                    translateY(110vh)
+                    rotate(720deg);
+            }
+        }
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+
+            h1 {
+                font-size: 34px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .photo {
+                width: 180px;
+                height: 180px;
+            }
+
+            .message {
+                font-size: 17px;
+            }
+
+            #musicButton {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- ========================= -->
+    <!-- BACKGROUND BIRTHDAY MUSIC -->
+    <!-- ========================= -->
+
+    <audio id="birthdayMusic" loop>
+
+        <source
+            src="birthday.mp3"
+            type="audio/mpeg">
+
+    </audio>
+
+
+    <!-- Music Button -->
+
+    <button
+        id="musicButton"
+        onclick="toggleMusic()">
+
+        🎵 Play Music
+
+    </button>
+
+
+    <!-- ========================= -->
+    <!-- FLOATING BALLOONS -->
+    <!-- ========================= -->
+
+    <div class="balloon b1">🎈</div>
+    <div class="balloon b2">🎈</div>
+    <div class="balloon b3">🎈</div>
+    <div class="balloon b4">🎈</div>
+    <div class="balloon b5">🎈</div>
+
+
+    <!-- ========================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ========================= -->
+
+    <div class="container">
+
+        <h1>
+            🎉 Happy Birthday! 🎉
+        </h1>
+
+
+        <h2>
+            Aditi Mishra 💖
+        </h2>
+
+
+        <!-- Aditi's Photo -->
+
+        <img
+            src="aditi.jpg"
+            class="photo"
+            alt="Aditi Mishra">
+
+
+        <!-- Birthday Message -->
+
+        <div class="message">
+
+            🎂 Wishing you a very
+            <b>Happy Birthday, Aditi!</b> 🎂
+
+            <br><br>
+
+            May your special day be filled with
+            <b>happiness, laughter, love and beautiful memories.</b> 💕
+
+            <br><br>
+
+            May all your dreams come true
+            and may you always keep smiling. 🌟
+
+            <br><br>
+
+            You deserve all the happiness
+            in the world. ❤️
+
+            <br><br>
+
+            Have an amazing birthday
+            and a wonderful year ahead! 🎁✨
+
+            <br><br>
+
+            With lots of love and blessings. 💖
+
+        </div>
+
+
+        <!-- Surprise Button -->
+
+        <button onclick="showSurprise()">
+
+            🎁 Tap for Your Surprise 🎁
+
+        </button>
+
+
+        <!-- Hidden Surprise -->
+
+        <div id="surprise">
+
+            🎊 🎊 🎊
+
+            <br><br>
+
+            <b>
+                Aditi, you are truly special! 💖
+            </b>
+
+            <br><br>
+
+            Keep smiling,
+            keep shining,
+            and have the most wonderful birthday! ✨
+
+            <br><br>
+
+            🎂 🥳 🎈 🎁 🌟 ❤️
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ========================= -->
+
+    <script>
+
+        /* =========================
+           MUSIC
+        ========================= */
+
+        const music =
+            document.getElementById("birthdayMusic");
+
+        const musicButton =
+            document.getElementById("musicButton");
+
+
+        function toggleMusic() {
+
+            if (music.paused) {
+
+                music.play();
+
+                musicButton.innerHTML =
+                    "🔊 Music On";
+
+            }
+
+            else {
+
+                music.pause();
+
+                musicButton.innerHTML =
+                    "🔇 Music Off";
+
+            }
+
+        }
+
+
+        /* =========================
+           SURPRISE
+        ========================= */
+
+        function showSurprise() {
+
+            document.getElementById("surprise")
+                .style.display = "block";
+
+
+            createConfetti();
+
+
+            /*
+               Start music when the user
+               interacts with the page.
+            */
+
+            music.play().catch(function() {});
+
+
+            musicButton.innerHTML =
+                "🔊 Music On";
+
+        }
+
+
+        /* =========================
+           CONFETTI
+        ========================= */
+
+        function createConfetti() {
+
+            for (let i = 0; i < 150; i++) {
+
+                let confetti =
+                    document.createElement("div");
+
+
+                confetti.classList.add(
+                    "confetti"
+                );
+
+
+                confetti.style.left =
+                    Math.random() * 100 + "vw";
+
+
+                confetti.style.animationDelay =
+                    Math.random() * 3 + "s";
+
+
+                confetti.style.background =
+                    "hsl(" +
+                    Math.random() * 360 +
+                    ", 100%, 60%)";
+
+
+                document.body.appendChild(
+                    confetti
+                );
+
+
+                setTimeout(function() {
+
+                    confetti.remove();
+
+                }, 7000);
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
